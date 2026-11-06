@@ -1,1 +1,339 @@
-# Flutter
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flutter Practical Exam – Experiments 1 to 3</title>
+<style>
+  :root { --blue:#1769aa; --bg:#f4f7fb; --ink:#172333; --muted:#5d6b7a; --card:#fff; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Arial, sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; }
+  header { background:linear-gradient(120deg,#124e82,#2586c7); color:white; padding:28px 18px; }
+  header .wrap, main { max-width:1100px; margin:auto; }
+  h1 { margin:0 0 8px; font-size:clamp(24px,4vw,36px); }
+  header p { margin:0; opacity:.94; }
+  main { padding:20px 16px 48px; }
+  .tabs { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 18px; }
+  .tab { border:0; border-radius:9px; padding:11px 16px; background:#dce8f3; color:#17476d; font-weight:700; cursor:pointer; }
+  .tab.active { background:var(--blue); color:white; }
+  .panel { display:none; }
+  .panel.active { display:block; }
+  .card { background:var(--card); border-radius:13px; padding:18px; margin:0 0 18px; box-shadow:0 3px 14px #18324a12; }
+  h2 { margin:0 0 8px; }
+  h3 { margin:18px 0 8px; }
+  .aim { color:var(--muted); margin-top:0; }
+  pre { overflow:auto; background:#101923; color:#e8f1f8; padding:16px; border-radius:10px; font-size:13px; line-height:1.5; tab-size:2; }
+  .code-head { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .copy { border:0; border-radius:8px; background:#1769aa; color:white; padding:8px 12px; cursor:pointer; font-weight:700; }
+  .copy:active, .tab:active { transform:scale(.98); }
+  ul { padding-left:22px; }
+  .pill { display:inline-block; background:#e5f2ff; color:#14558b; padding:4px 9px; border-radius:20px; margin:3px; font-size:13px; }
+  .note { background:#fff8df; border-left:4px solid #e5ae27; padding:12px 14px; border-radius:7px; }
+  footer { color:var(--muted); text-align:center; padding:10px 16px 28px; }
+  @media(max-width:600px) { .card { padding:14px; } pre { font-size:12px; } .tab { flex:1; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Flutter Practical Exam – Study Website</h1>
+    <p>Experiments 1–3 · Short code · Key concepts · Quick revision</p>
+  </div>
+</header>
+<main>
+  <nav class="tabs" aria-label="Experiments">
+    <button class="tab active" data-target="exp1">Experiment 1</button>
+    <button class="tab" data-target="exp2">Experiment 2</button>
+    <button class="tab" data-target="exp3">Experiment 3</button>
+  </nav>
+
+  <section id="exp1" class="panel active">
+    <div class="card">
+      <h2>Experiment 1 – Working with Widgets and Layouts</h2>
+      <p class="aim"><b>Aim:</b> To develop a Flutter application using basic widgets and layout widgets.</p>
+      <span class="pill">Container</span><span class="pill">Row</span><span class="pill">Column</span>
+      <span class="pill">Expanded</span><span class="pill">ListView</span><span class="pill">Card</span>
+      <div class="code-head"><h3>Short practical code</h3><button class="copy" data-copy="code1">Copy code</button></div>
+      <pre><code id="code1">import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Student Dashboard')),
+        body: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: const Text('Student Profile'),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                Icon(Icons.home),
+                Icon(Icons.person),
+                Icon(Icons.settings),
+              ],
+            ),
+            Expanded(
+              child: ListView(
+                children: const [
+                  Card(child: ListTile(title: Text('Flutter'))),
+                  Card(child: ListTile(title: Text('Cloud Computing'))),
+                  Card(child: ListTile(title: Text('Programming'))),
+                  Card(child: ListTile(title: Text('AI'))),
+                ],
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person), label: 'Profile'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: 'Settings'),
+          ],
+        ),
+      ),
+    );
+  }
+}</code></pre>
+      <h3>Remember the structure</h3>
+      <pre>MaterialApp → Scaffold → AppBar
+                         → Column
+                            → Container
+                            → Row
+                            → Expanded → ListView → Card
+                         → BottomNavigationBar</pre>
+      <div class="note"><b>Quick memory:</b> Column = vertical, Row = horizontal, Expanded = remaining space, ListView = scrollable list.</div>
+    </div>
+  </section>
+
+  <section id="exp2" class="panel">
+    <div class="card">
+      <h2>Experiment 2 – Adaptive and Responsive UI Design</h2>
+      <p class="aim"><b>Aim:</b> To create a Flutter application that automatically adapts its layout according to screen size.</p>
+      <span class="pill">LayoutBuilder</span><span class="pill">maxWidth</span><span class="pill">Column</span>
+      <span class="pill">Row</span><span class="pill">Expanded</span><span class="pill">Card</span>
+      <div class="code-head"><h3>Short practical code</h3><button class="copy" data-copy="code2">Copy code</button></div>
+      <pre><code id="code2">import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: ResponsivePage(),
+    );
+  }
+}
+
+class ResponsivePage extends StatelessWidget {
+  const ResponsivePage({super.key});
+
+  Widget myCard(String name) {
+    return Card(
+      child: ListTile(
+        leading: const Icon(Icons.school),
+        title: Text(name),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Responsive Dashboard')),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          // Mobile layout
+          if (constraints.maxWidth &lt; 600) {
+            return Column(
+              children: [
+                myCard('Student'),
+                myCard('Courses'),
+                myCard('Attendance'),
+                myCard('Results'),
+              ],
+            );
+          }
+
+          // Desktop / tablet layout
+          return Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(child: myCard('Student')),
+                  Expanded(child: myCard('Courses')),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(child: myCard('Attendance')),
+                  Expanded(child: myCard('Results')),
+                ],
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}</code></pre>
+      <h3>Remember the structure</h3>
+      <pre>LayoutBuilder
+  if (constraints.maxWidth &lt; 600) → Mobile → Column
+  else                            → Desktop → Row + Expanded</pre>
+      <div class="note"><b>Quick memory:</b> Below 600 pixels = mobile layout. 600 pixels or more = desktop/tablet layout in this program.</div>
+    </div>
+  </section>
+
+  <section id="exp3" class="panel">
+    <div class="card">
+      <h2>Experiment 3 – Add Interactivity to App: Input and Forms</h2>
+      <p class="aim"><b>Aim:</b> To create an interactive Flutter form with input fields and validation.</p>
+      <span class="pill">Form</span><span class="pill">GlobalKey</span><span class="pill">TextFormField</span>
+      <span class="pill">validator</span><span class="pill">obscureText</span><span class="pill">SnackBar</span>
+      <div class="code-head"><h3>Short practical code</h3><button class="copy" data-copy="code3">Copy code</button></div>
+      <pre><code id="code3">import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: StudentForm(),
+    );
+  }
+}
+
+class StudentForm extends StatelessWidget {
+  const StudentForm({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final formKey = GlobalKey&lt;FormState&gt;();
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Student Registration')),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              // Name
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Student Name',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Enter student name';
+                  }
+                  return null;
+                },
+              ),
+
+              // Email
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                ),
+              ),
+
+              // Password
+              TextFormField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // Submit button
+              ElevatedButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Form submitted successfully'),
+                      ),
+                    );
+                  }
+                },
+                child: const Text('Submit'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}</code></pre>
+      <h3>Remember the structure</h3>
+      <pre>Scaffold → Padding → Form → Column
+                         → TextFormField (Name)
+                         → TextFormField (Email)
+                         → TextFormField (Password)
+                         → ElevatedButton (Submit)</pre>
+      <div class="note"><b>Quick memory:</b> GlobalKey identifies the form, validator checks input, obscureText hides password, validate() checks the form.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Quick revision – Experiments 1 to 3</h2>
+    <ul>
+      <li><b>Experiment 1:</b> Container, Row, Column, Expanded, ListView, Card.</li>
+      <li><b>Experiment 2:</b> LayoutBuilder, constraints.maxWidth, mobile Column, desktop Row.</li>
+      <li><b>Experiment 3:</b> Form, GlobalKey&lt;FormState&gt;, TextFormField, validator, obscureText, validate(), SnackBar.</li>
+    </ul>
+    <p><b>Study tip:</b> Memorize the common Flutter starting code once, then focus on each experiment's body and special widgets.</p>
+  </section>
+</main>
+<footer>Flutter Practical Exam Study Sheet · Experiments 1–3</footer>
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.target).classList.add('active');
+  }));
+  document.querySelectorAll('.copy').forEach(button => {
+    button.addEventListener('click', async () => {
+      const code = document.getElementById(button.dataset.copy).innerText;
+      try {
+        await navigator.clipboard.writeText(code);
+        button.textContent = 'Copied!';
+        setTimeout(() => button.textContent = 'Copy code', 1400);
+      } catch {
+        button.textContent = 'Select code to copy';
+      }
+    });
+  });
+</script>
+</body>
+</html>
